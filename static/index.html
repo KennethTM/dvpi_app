@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <script src="lib/papaparse.min.js"></script>
+    <script src="script.js"></script>
+
+    <h1>Dansk vandplante indeks (DVPI)</h1>
+    <p>Upload '.csv' tekstfil med artsnavn og dækningsgrad (0-100%) formateret som:</p>
+    <i>art,dkg
+        <br>
+        Trådalger,60
+        <br>
+        Ranunculus repens,35.5
+        <br>
+        Berula,4.5
+        <br>
+    </i>
+
+    <br>
+
+    <input type="file" id="fileUpload" accept=".csv" onchange="parse_csv(this)"/>
+
+    <br>
+    <br>
+
+    <div id="content"></div>
+
+
+</body>
+</html>
