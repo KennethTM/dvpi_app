@@ -5,7 +5,7 @@ function upload_image() {
     let data = new FormData();
     data.append('file', file);
 
-    fetch('http://127.0.0.1:8000/predict', {
+    fetch('https://dvpi.herokuapp.com/predict', {
         method: 'POST',
         body: data
     }).then(response => response.json())
