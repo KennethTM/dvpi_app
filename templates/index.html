@@ -50,7 +50,9 @@
             <h2>DVPI billed identifikation</h1>
     
                 <p>Upload billedfil (for eksempel .png, .jpeg, .jpg, .tif, etc.)</p>
-            
+                <p>Identifikation af de 100 mest almindelige arter som indgår DVPI</p>
+                <a href="{{ url_for('static', path='taxon_list.html') }}">Se artsliste</a>
+                <br>
                 <br>
             
                 <input type="file" id="imageUpload" onchange= "upload_image(this)" />
