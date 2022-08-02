@@ -6,3 +6,4 @@ fastapi==0.78.0
 uvicorn
 zeep==4.1.0
 numpy
+python-multipart

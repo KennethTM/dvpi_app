@@ -82,13 +82,9 @@ async def predict_image(file: UploadFile = File(...)):
 
   label = ", ".join(["{} {}%".format(taxon_key_dict[l], int(probs[i]*100)) for l, i in zip(top_5_labels, idx)])
   
-  #label = f'{pred} ({int(probs[pred_idx]*100)} %)'
-
   return {"response": label}
 
 #Static files
-#app.mount("/", StaticFiles(directory="static/", html=True), name="static")
-
 app.mount("/static", StaticFiles(directory="static/"), name="static")
 
 templates = Jinja2Templates(directory="templates")
