@@ -6,7 +6,7 @@ import pickle
 
 #Save taxonkey-name dict
 df = pd.read_csv("data/dvpi_species_sc_gbif.csv")
-taxon_key_dict = {k: v for k, v in zip(df["usageKey"], df["long_edit"])}
+taxon_key_dict = {str(k): v for k, v in zip(df["usageKey"], df["long_edit"])}
 
 with open("data/taxon_key_dict.p", "wb") as output_file:
     pickle.dump(taxon_key_dict, output_file)

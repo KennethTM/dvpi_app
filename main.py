@@ -65,12 +65,10 @@ model = load_learner(model_weights)
 taxon_key_dict = pickle.load(open("data/taxon_key_dict.p", "rb"))
 
 #Create species list
-x=sorted([taxon_key_dict[i] for i in model.dls.vocab])
-string = "<ol>\n"
-string += "\n".join(["<li>" + str(s) + "</li>" for s in x])
-string += "\n</ol>"
-
-
+#x=sorted([taxon_key_dict[i] for i in model.dls.vocab])
+#string = "<ol>\n"
+#string += "\n".join(["<li>" + str(s) + "</li>" for s in x])
+#string += "\n</ol>"
 
 @app.post("/predict")
 async def predict_image(file: UploadFile = File(...)):
