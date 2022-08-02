@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <script src="{{ url_for('static', path='lib/papaparse.min.js') }}"></script>
+    <script src="{{ url_for('static', path='script_csv.js') }}"></script>
+    <script src="{{ url_for('static', path='script_image.js') }}"></script>
+    
+</head>
+<body>
+
+    <h1>Dansk vandplante indeks (DVPI)</h1>
+
+    <div class="main-container">
+
+        <div class = "calc-container">
+    
+            <h2>DVPI beregner</h1>
+    
+            <p>Upload '.csv' tekstfil med artsnavn og dækningsgrad (0-100%) formateret som:</p>
+            <i>art,dkg
+                <br>
+                Trådalger,60
+                <br>
+                Ranunculus repens,35.5
+                <br>
+                Berula,4.5
+                <br>
+            </i>
+
+            <br>
+
+            <a href="{{ url_for('static', path='example.csv') }}" download="eksempel.csv">Hent eksempel på '.csv' fil</a>
+
+            <br>
+        
+            <br>
+        
+            <input type="file" id="fileUpload" accept=".csv" onchange="parse_csv(this)"/>
+        
+            <br>
+            <br>
+        
+            <div id="dvpi_result"></div>
+    
+        </div>
+    
+        <div class = "classif-container">
+    
+            <h2>DVPI billed identifikation</h1>
+    
+                <p>Upload billedfil (for eksempel .png, .jpeg, .jpg, .tif, etc.)</p>
+            
+                <br>
+            
+                <input type="file" id="imageUpload" onchange= "upload_image(this)" />
+            
+                <br>
+                <br>
+    
+                <div id="dvpi_art"></div>
+    
+        </div>
+    
+    </div>
+ 
+</body>
+</html>
