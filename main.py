@@ -11,6 +11,9 @@ from fastai.vision.all import *
 import numpy as np
 from fastapi.templating import Jinja2Templates
 
+#create runtime env
+#pip install -r requirements.txt
+
 #uvicorn main:app --reload
 
 app = FastAPI()
@@ -60,7 +63,7 @@ async def get_dvpi(items: List[Item]):
   return response_parsed
 
 #Image classifier
-model_weights = "data/images_preproc/resnet_18_100.export"
+model_weights = "data/images_preproc/effnet_b0.export"
 model = load_learner(model_weights)
 taxon_key_dict = pickle.load(open("data/taxon_key_dict.p", "rb"))
 
