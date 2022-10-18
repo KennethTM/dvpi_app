@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 data/images_preproc/
+__pycache__/

@@ -4,14 +4,14 @@ import os
 import pandas as pd
 import pickle
 
-#Save taxonkey-name dict
+#Read species data and write taxonkey-name dictionary for later
 df = pd.read_csv("data/dvpi_species_sc_gbif.csv")
 taxon_key_dict = {str(k): v for k, v in zip(df["usageKey"], df["long_edit"])}
 
 with open("data/taxon_key_dict.p", "wb") as output_file:
     pickle.dump(taxon_key_dict, output_file)
 
-#Preprocess images to smaller size
+#Preprocess images by resizing to ease later model training
 data_dir = Path("data")
 image_dir = data_dir/"images"
 preproc_dir = data_dir/"images_preproc"

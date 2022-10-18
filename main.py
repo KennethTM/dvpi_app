@@ -11,9 +11,10 @@ from fastai.vision.all import *
 import numpy as np
 from fastapi.templating import Jinja2Templates
 
-#create runtime env
+#Create runtime env:
 #pip install -r requirements.txt
 
+#Run application locally:
 #uvicorn main:app --reload
 
 app = FastAPI()
@@ -26,9 +27,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#DVPI calculator
+###### DVPI endpoint ######
 id_latin_dict = pickle.load(open("data/id_latin_dict.p", "rb"))
 
+#Create SOAP client interface using zeep
 wsdl = 'http://service.dvpi.au.dk/1.0.0/DCE_DVPI.svc?singleWsdl'
 client = zeep.Client(wsdl=wsdl)
 
@@ -41,6 +43,8 @@ class Item(BaseModel):
     art: str
     dkg: str
 
+#Define request handler for requesting DVPI score from external API
+#from text file with species names and cover (see example text file)
 @app.post("/dvpi")
 async def get_dvpi(items: List[Item]):
 
@@ -62,17 +66,13 @@ async def get_dvpi(items: List[Item]):
 
   return response_parsed
 
-#Image classifier
-model_weights = "data/images_preproc/effnet_b0.export"
+###### Plant identificaiton endpoint ######
+#Load plant species image classification model
+model_weights = "data/model/effnet_b0.export"
 model = load_learner(model_weights)
 taxon_key_dict = pickle.load(open("data/taxon_key_dict.p", "rb"))
 
-#Create species list
-#x=sorted([taxon_key_dict[i] for i in model.dls.vocab])
-#string = "<ol>\n"
-#string += "\n".join(["<li>" + str(s) + "</li>" for s in x])
-#string += "\n</ol>"
-
+#Define request handler for image classification which returns top-5 most likely species
 @app.post("/predict")
 async def predict_image(file: UploadFile = File(...)):
 
@@ -83,23 +83,22 @@ async def predict_image(file: UploadFile = File(...)):
   except:
     raise HTTPException(status_code=422, detail="Unable to process file")
 
-  pred, pred_idx, probs = model.predict(image)
+  _, _, probs = model.predict(image)
 
   #get top preds
-  val, idx = probs.topk(5)
+  _, idx = probs.topk(5)
   top_5_labels = model.dls.vocab[idx]
 
   label = ", ".join(["{} {}%".format(taxon_key_dict[l], int(probs[i]*100)) for l, i in zip(top_5_labels, idx)])
   
   return {"response": label}
 
-#Static files
+###### Static files ######
 app.mount("/static", StaticFiles(directory="static/"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
+#Define request handler for landing page
 @app.get("/")
 async def root(request: Request):
-    return templates.TemplateResponse(
-        "index.html", {"request": request}
-    )
+    return templates.TemplateResponse("index.html", {"request": request})

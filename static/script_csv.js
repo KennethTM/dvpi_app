@@ -10,7 +10,7 @@ function parse_csv() {
           
           console.log(JSON.stringify(data))
         
-          fetch("https://dvpi.herokuapp.com/dvpi", {
+          fetch("http://127.0.0.1:8000/dvpi", {
             method: "POST",
             headers: {'Content-Type': 'application/json', 'accept': 'application/json'}, 
             body: JSON.stringify(data)
