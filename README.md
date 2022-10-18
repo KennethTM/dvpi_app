@@ -2,6 +2,8 @@
 
 ## Application for determining DVPI and plant species identification
 
+The application is described in further detail in two blog posts ([part 1](https://www.datainwater.com/post/dvpi_1/) and [part 2](https://www.datainwater.com/post/dvpi_2/)).
+
 Web application build using FastAPI containing 3 endpoints:
 
 * Landing page with simple interface for uploading '.csv' file for determining DVPI score (Danish stream plant index, [link to report in Danish](https://dce2.au.dk/pub/sr135.pdf)) or images for species identification
@@ -18,5 +20,6 @@ To run the application locally run:
 
 The repository also contains additionally files for serving the application on Heroku.
 
-*Landing page interface*
 ![Landing page](https://github.com/KennethTM/dvpi_app/blob/main/dvpi_page.png)
+
+*Landing page interface*
