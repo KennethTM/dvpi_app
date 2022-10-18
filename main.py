@@ -14,7 +14,7 @@ from fastapi.templating import Jinja2Templates
 #Create runtime env:
 #pip install -r requirements.txt
 
-#Run application locally:
+#Run application locally (shift + reload in browser for hard refresh):
 #uvicorn main:app --reload
 
 app = FastAPI()
@@ -66,7 +66,7 @@ async def get_dvpi(items: List[Item]):
 
   return response_parsed
 
-###### Plant identificaiton endpoint ######
+###### Plant ID endpoint ######
 #Load plant species image classification model
 model_weights = "data/model/effnet_b0.export"
 model = load_learner(model_weights)
@@ -85,10 +85,11 @@ async def predict_image(file: UploadFile = File(...)):
 
   _, _, probs = model.predict(image)
 
-  #get top preds
+  #Get top-5 highest predictions
   _, idx = probs.topk(5)
   top_5_labels = model.dls.vocab[idx]
 
+  #Create lable
   label = ", ".join(["{} {}%".format(taxon_key_dict[l], int(probs[i]*100)) for l, i in zip(top_5_labels, idx)])
   
   return {"response": label}
