@@ -11,6 +11,11 @@ taxon_key_dict = {str(k): v for k, v in zip(df["usageKey"], df["long_edit"])}
 with open("data/taxon_key_dict.p", "wb") as output_file:
     pickle.dump(taxon_key_dict, output_file)
 
+#Write taxonkey-name text file
+with open("data/taxonkey_name.txt", "w") as output:
+    for k, v in taxon_key_dict.items():
+        output.write(str(k) + "," + str(v) + '\n')
+
 #Preprocess images by resizing to ease later model training
 data_dir = Path("data")
 image_dir = data_dir/"images"
