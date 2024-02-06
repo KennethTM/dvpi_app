@@ -3,7 +3,7 @@ torch==1.12.1+cpu
 torchvision==0.13.1+cpu
 fastai==2.7.9
 timm
-fastapi==0.78.0
+fastapi==0.109.1
 uvicorn
 zeep==4.1.0
 numpy
