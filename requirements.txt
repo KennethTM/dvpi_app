@@ -1,6 +1,6 @@
 -f https://download.pytorch.org/whl/torch_stable.html
-torch==1.12.1+cpu 
-torchvision==0.13.1+cpu
+torch
+torchvision
 fastai==2.7.9
 timm
 fastapi==0.109.1
